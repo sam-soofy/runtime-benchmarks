@@ -1,0 +1,13 @@
+# Python Benchmark Dependencies
+# Optional but recommended for better network performance
+
+# Async HTTP client for concurrent requests
+aiohttp>=3.9.0
+
+# Note: All other operations use Python standard library only
+# - json (built-in)
+# - re (built-in)
+# - asyncio (built-in)
+# - time (built-in)
+# - random (built-in)
+# - dataclasses (built-in Python 3.7+)

@@ -1,0 +1,144 @@
+🚀 Starting Benchmark (Python Runtime)
+==================================================
+
+💻 CPU Operations:
+  ✓ Fibonacci(35): 1258.67ms
+  ✓ Array Operations (10x): 58.80ms
+  ✓ JSON Operations: 27.73ms
+
+📁 File Operations:
+  ✓ Found 89643 matches for "example"
+✓ CSV Search & Write: 61.81ms
+
+📡 Network Operations:
+  Round 1/4: 776.99ms
+  Round 2/4: 826.36ms
+  Round 3/4: 805.15ms
+  Round 4/4: 1205.28ms
+
+==================================================
+📊 Summary:
+   Total Execution Time: 6258.40ms
+   CPU Operations: 1345.20ms
+   File Operations: 61.81ms
+   Network Operations: 3613.78ms
+==================================================
+	Command being timed: "python3 main.py example"
+	User time (seconds): 2.95
+	System time (seconds): 0.05
+	Percent of CPU this job got: 46%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:06.49
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 47204
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 10348
+	Voluntary context switches: 69
+	Involuntary context switches: 19
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+🚀 Starting Benchmark (Python Runtime)
+==================================================
+
+💻 CPU Operations:
+  ✓ Fibonacci(35): 1251.23ms
+  ✓ Array Operations (10x): 57.46ms
+  ✓ JSON Operations: 27.06ms
+
+📁 File Operations:
+  ✓ Found 89643 matches for "example"
+✓ CSV Search & Write: 70.18ms
+
+📡 Network Operations:
+  Round 1/4: 981.30ms
+  Round 2/4: 1191.93ms
+  Round 3/4: 918.71ms
+  Round 4/4: 1055.96ms
+
+==================================================
+📊 Summary:
+   Total Execution Time: 6840.52ms
+   CPU Operations: 1335.75ms
+   File Operations: 70.18ms
+   Network Operations: 4147.89ms
+==================================================
+	Command being timed: "python3 main.py example"
+	User time (seconds): 3.00
+	System time (seconds): 0.06
+	Percent of CPU this job got: 43%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:07.09
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 47204
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 10350
+	Voluntary context switches: 74
+	Involuntary context switches: 23
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+🚀 Starting Benchmark (Python Runtime)
+==================================================
+
+💻 CPU Operations:
+  ✓ Fibonacci(35): 1295.23ms
+  ✓ Array Operations (10x): 61.07ms
+  ✓ JSON Operations: 30.13ms
+
+📁 File Operations:
+  ✓ Found 89643 matches for "example"
+✓ CSV Search & Write: 62.99ms
+
+📡 Network Operations:
+  Round 1/4: 789.44ms
+  Round 2/4: 921.41ms
+  Round 3/4: 831.73ms
+  Round 4/4: 810.02ms
+
+==================================================
+📊 Summary:
+   Total Execution Time: 6050.84ms
+   CPU Operations: 1386.43ms
+   File Operations: 62.99ms
+   Network Operations: 3352.60ms
+==================================================
+	Command being timed: "python3 main.py example"
+	User time (seconds): 3.00
+	System time (seconds): 0.06
+	Percent of CPU this job got: 48%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:06.29
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 46848
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 10348
+	Voluntary context switches: 66
+	Involuntary context switches: 18
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
