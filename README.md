@@ -8,6 +8,8 @@ A comprehensive benchmarking suite to compare TypeScript (Bun & Deno) vs Go vs P
 
 🐍 **Python benchmarks included** with multiple optimized runs to ensure fair comparison. Note that **network I/O performance varies significantly** due to external API latency and our network connectivity, so results may differ between runs. Network benchmarks are susceptible to connectivity fluctuations—focus on CPU and file I/O metrics for deterministic comparisons. Python excels in memory efficiency but faces challenges with startup time and recursive CPU tasks.
 
+📝 **Code Complexity Matters:** Beyond raw performance, I wanted to understand **developer experience and code maintainability** across languages. This benchmark also tracks **lines of code (LOC)** for the same functionality—showing how verbose or concise each language is. Less code is often easier to maintain, debug, and understand. TypeScript/JavaScript's conciseness shines here, while Go and Python require more verbosity for the same logic. The comparison helps you decide: do you prioritize performance, speed of development, or a balance of both?
+
 ⚠️ **Disclaimer:** I can't guarantee accuracy yet—I'm new to Go and used AI to accelerate development. In the future, I'll review and refine the code. Meanwhile, feel free to run these benchmarks yourself and share your results!
 
 🐦 Follow me on X: [@EliteATT](https://x.com/EliteATT)
@@ -24,14 +26,16 @@ A comprehensive benchmarking suite to compare TypeScript (Bun & Deno) vs Go vs P
 | **Network (20 reqs)** | 2497.0ms | 2088.3ms | 2235.2ms | 3418.4ms |
 | **Memory Peak** | 77.6 MB | 81.3 MB | 26.9 MB | 47.9 MB |
 | **Startup Overhead** | ~130ms | ~70ms | ~580ms* | ~130ms |
+| **Lines of Code** | 248 | 263 | 382 | 358 |
 
 **Key Takeaways:**
 
-- 🏆 **Deno**: Fastest overall execution (2257.5ms) with good startup and exceptional I/O tasks, but with most memory cost and a little bit lower performance from the top on CPU and memory heavy computations
-- ⚡ **Bun**: Competitive performance, fastest CPU operations (108.7ms) (in TypeScript) and one of the fastest overall, with good memory efficiency (77.6 MB) and high file I/O performance (12.1ms) and good network I/O
-- 💾 **Go**: Exceptional memory efficiency (26.9 MB), great with heavier CPU and memory tasks, but slowest file I/O (262.8ms)*
-- 🐍 **Python**: Strong file I/O performance (43.1ms), one of lowest memory footprint (47.9 MB), but struggles with recursive CPU operations
-- *Go's startup overhead includes binary compilation; JIT runtimes show runtime initialization cost
+- 🏆 **Deno**: Fastest overall execution (2257.5ms) with good startup and exceptional I/O tasks, concise TypeScript code (263 LOC), but not most efficient and fastest on CPU and memory heavy tasks
+- ⚡ **Bun**: Fastest CPU operations (108.7ms), most concise code (248 LOC), best overall balance of performance and brevity, but not the best heavy network tasks (maybe can be better in a more Bun way of things) and not the fastest startup
+- 💾 **Go**: Best memory efficiency (26.9 MB) and CPU performance, but most verbose code (382 LOC) and slowest file I/O (262.8ms)*
+- 🐍 **Python**: Strong file I/O performance (43.1ms) with moderate code length (358 LOC), but slowest in CPU-bound recursion
+
+*- Go's startup overhead includes binary compilation (not with the "run.sh" which should use the already compiled binary); JIT runtimes show runtime initialization cost
 
 ## 📋 Overview
 
@@ -43,6 +47,24 @@ This benchmark tests:
 - **Network I/O**: 20 concurrent HTTP requests (5 requests × 4 rounds)
 - **Memory usage**: Peak memory consumption
 - **Total execution time**: End-to-end performance
+- **Code complexity**: Lines of code needed for clean, typed, idiomatic implementations
+
+## 📐 Code Metrics
+
+Beyond performance, code verbosity matters for maintainability and development speed. Here's how each language compares in lines of code for identical functionality (all implementations use proper typing and follow language conventions):
+
+**Command to count lines:**
+
+```bash
+echo "📊 Lines of Code Count" && echo && echo "TypeScript (Bun):" && find ts-bun -name "*.ts" -not -path "*/node_modules/*" -type f -exec wc -l {} + && echo && echo "TypeScript (Deno):" && find ts-deno -name "*.ts" -not -path "*/node_modules/*" -type f -exec wc -l {} + && echo && echo "Python:" && find python -name "*.py" -not -path "*/.venv/*" -not -path "*/__pycache__/*" -type f -exec wc -l {} + && echo && echo "Go:" && find golang -name "*.go" -type f -exec wc -l {} +
+```
+
+**Results Breakdown:**
+
+- **Bun (248 LOC)**: Most concise, TypeScript's expressive syntax eliminates boilerplate
+- **Deno (263 LOC)**: Nearly identical to Bun, slightly more due to test file inclusion
+- **Python (358 LOC)**: More verbose due to explicit error handling and type hints
+- **Go (382 LOC)**: Most verbose; explicit error checking and type declarations add significant code
 
 ## 🏗️ Project Structure
 
