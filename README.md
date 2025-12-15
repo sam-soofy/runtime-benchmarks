@@ -1,10 +1,12 @@
 # Language & Runtime Benchmark Suite
 
-A comprehensive benchmarking suite to compare TypeScript (Bun & Deno) vs Go for real-world applications with modular architecture and file I/O operations.
+A comprehensive benchmarking suite to compare TypeScript (Bun & Deno) vs Go vs Python for real-world applications with modular architecture and file I/O operations.
 
 🤔 For a long time, I was considering switching to GoLang for some projects, but since Deno and TypeScript, I wasn't as sure. Each time I ran Next.js projects with Deno, I was happier—it was faster to run, compile, load pages (faster than both Bun and Node.js), and recompile changes during development.
 
-📊 So I decided to create this benchmark suite testing CPU, I/O operations, startup time, and resource usage across 3 runtimes in 2 languages. I hope these results help you make data-driven decisions about which runtime fits your needs.
+📊 So I decided to create this benchmark suite testing CPU, I/O operations, startup time, and resource usage across 4 runtimes in 3 languages. I hope these results help you make data-driven decisions about which runtime fits your needs.
+
+🐍 **Python benchmarks included** with multiple optimized runs to ensure fair comparison. Note that **network I/O performance varies significantly** due to external API latency and our network connectivity, so results may differ between runs. Network benchmarks are susceptible to connectivity fluctuations—focus on CPU and file I/O metrics for deterministic comparisons. Python excels in memory efficiency but faces challenges with startup time and recursive CPU tasks.
 
 ⚠️ **Disclaimer:** I can't guarantee accuracy yet—I'm new to Go and used AI to accelerate development. In the future, I'll review and refine the code. Meanwhile, feel free to run these benchmarks yourself and share your results!
 
@@ -14,20 +16,21 @@ A comprehensive benchmarking suite to compare TypeScript (Bun & Deno) vs Go for 
 
 **Averaged across 3 runs:**
 
-| Metric | Bun | Deno | Go |
-|--------|-----|------|-----|
-| **Total Time** | 2619.5ms | 2257.5ms | 2584.2ms |
-| **CPU Operations** | 108.7ms | 137.0ms | 86.3ms |
-| **File I/O** | 12.1ms | 31.4ms | 262.8ms |
-| **Network (20 reqs)** | 2497.0ms | 2088.3ms | 2235.2ms |
-| **Memory Peak** | 77.6 MB | 81.3 MB | 26.9 MB |
-| **Startup Overhead** | ~130ms | ~70ms | ~580ms* |
+| Metric | Bun | Deno | Go | Python |
+|--------|-----|------|-----|--------|
+| **Total Time** | 2619.5ms | 2257.5ms | 2584.2ms | 6124.1ms |
+| **CPU Operations** | 108.7ms | 137.0ms | 86.3ms | 1375.4ms |
+| **File I/O** | 12.1ms | 31.4ms | 262.8ms | 43.1ms |
+| **Network (20 reqs)** | 2497.0ms | 2088.3ms | 2235.2ms | 3418.4ms |
+| **Memory Peak** | 77.6 MB | 81.3 MB | 26.9 MB | 47.9 MB |
+| **Startup Overhead** | ~130ms | ~70ms | ~580ms* | ~130ms |
 
 **Key Takeaways:**
 
-- 🏆 **Deno**: Fastest overall execution (2257.5ms) with good startup
-- ⚡ **Bun**: Competitive performance, fastest CPU operations (108.7ms)
-- 💾 **Go**: Exceptional memory efficiency (26.9 MB), slowest file I/O (262.8ms)*
+- 🏆 **Deno**: Fastest overall execution (2257.5ms) with good startup and exceptional I/O tasks, but with most memory cost and a little bit lower performance from the top on CPU and memory heavy computations
+- ⚡ **Bun**: Competitive performance, fastest CPU operations (108.7ms) (in TypeScript) and one of the fastest overall, with good memory efficiency (77.6 MB) and high file I/O performance (12.1ms) and good network I/O
+- 💾 **Go**: Exceptional memory efficiency (26.9 MB), great with heavier CPU and memory tasks, but slowest file I/O (262.8ms)*
+- 🐍 **Python**: Strong file I/O performance (43.1ms), one of lowest memory footprint (47.9 MB), but struggles with recursive CPU operations
 - *Go's startup overhead includes binary compilation; JIT runtimes show runtime initialization cost
 
 ## 📋 Overview
@@ -58,6 +61,17 @@ This benchmark tests:
 │
 ├── ts-deno/             # TypeScript with Deno runtime
 │   ├── (same structure)
+│
+├── python/              # Python implementation
+│   ├── main.py          # Entry point & orchestration
+│   ├── types_def.py     # Type definitions
+│   ├── cpu_tasks.py     # CPU-bound operations
+│   ├── network_tasks.py # Network operations
+│   ├── file_tasks.py    # File I/O operations
+│   ├── pyproject.toml   # Python configuration
+│   ├── run.sh           # Benchmark runner
+│   ├── generate_csv.sh  # CSV data generator
+│   └── data.csv         # Test data (generated)
 │
 └── golang/              # Go implementation
     ├── main.go
@@ -107,7 +121,26 @@ chmod +x run.sh
 ./run.sh
 ```
 
-### 3. Go (golang/)
+### 3. Python (python/)
+
+```bash
+# Install Python (if needed)
+# macOS: brew install python3
+# Linux: apt install python3
+
+# Navigate to directory
+cd python/
+
+# Generate test data
+chmod +x generate_csv.sh
+./generate_csv.sh
+
+# Run benchmark
+chmod +x run.sh
+./run.sh
+```
+
+### 4. Go (golang/)
 
 ```bash
 # Install Go (if needed)
@@ -194,7 +227,7 @@ This creates a `data.csv` file with 50,000 rows (~5MB) containing the word "exam
 ### Run Single Benchmark
 
 ```bash
-cd ts-bun  # or ts-deno, or golang
+cd ts-bun  # or ts-deno, python, or golang
 ./run.sh
 ```
 
@@ -314,12 +347,21 @@ for (let round = 1; round <= 4; round++)  // Try 2, 6, 10
 - ⚠️ Slower startup than Bun (~50-100ms)
 - ⚠️ Permission system overhead
 
+**Python:**
+
+- ✅ Excellent file I/O performance
+- ✅ Good memory efficiency (~50MB)
+- ⚠️ Slow recursive CPU operations (Fibonacci)
+- ⚠️ Higher network latency handling
+- ⚠️ Moderate startup time (~130ms)
+
 ### What to Look For
 
 1. **Go should win**: Startup time, memory usage, CPU tasks
 2. **Bun should be close**: Overall performance, competitive with Go
 3. **Deno should be solid**: Good but slower startup, reliable
-4. **All should handle I/O well**: Network should be similar across all
+4. **Python should excel**: File I/O operations, memory usage
+5. **All should handle I/O well**: Network varies due to external API latency
 
 ## 📦 Files Generated
 
@@ -330,6 +372,7 @@ for (let round = 1; round <= 4; round++)  // Try 2, 6, 10
 ## 🛡️ No External Dependencies
 
 - **TypeScript**: Only Bun/Deno built-in APIs
+- **Python**: Standard library only (asyncio, json, csv, re)
 - **Go**: Only standard library
 - **Network**: Free public API (JSONPlaceholder)
 
@@ -347,12 +390,13 @@ After running all benchmarks:
 
 1. **Collect Results**:
 
-   ```bash
-   # Save all results
-   cd ts-bun && ./run.sh > ../results-bun.txt 2>&1
-   cd ts-deno && ./run.sh > ../results-deno.txt 2>&1
-   cd golang && ./run.sh > ../results-go.txt 2>&1
-   ```
+    ```bash
+    # Save all results
+    cd ts-bun && ./run.sh > ../results-bun.txt 2>&1
+    cd ts-deno && ./run.sh > ../results-deno.txt 2>&1
+    cd python && ./run.sh > ../results-python.txt 2>&1
+    cd golang && ./run.sh > ../results-go.txt 2>&1
+    ```
 
 2. **Compare**: Look at total time, memory, and variance
 
