@@ -8,7 +8,7 @@ A comprehensive benchmarking suite to compare TypeScript (Bun & Deno) vs Go for 
 
 ⚠️ **Disclaimer:** I can't guarantee accuracy yet—I'm new to Go and used AI to accelerate development. In the future, I'll review and refine the code. Meanwhile, feel free to run these benchmarks yourself and share your results!
 
-🐦 Follow me on X: [@EliteATT](https://x.com/EliteATT)Twitt me @EliteATT on "x.com/EliteATT"
+🐦 Follow me on X: [@EliteATT](https://x.com/EliteATT)
 
 ## 🎯 Quick Results Summary
 
