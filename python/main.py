@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-main.py - Entry point for Python Benchmark
+main.py - Entry point for Python Benchmark (optimized)
 """
 
 import sys
@@ -25,36 +25,36 @@ async def run_benchmark():
     """Main benchmark orchestrator"""
     results: List[BenchmarkResult] = []
     total_start = time.perf_counter()
-
+    
     print("🚀 Starting Benchmark (Python Runtime)")
     print("=" * 50)
-
+    
     # Phase 1: CPU-bound operations
     print("\n💻 CPU Operations:")
     cpu_results = run_cpu_tasks()
     results.extend(cpu_results)
-
+    
     # Phase 2: File operations (CSV search)
     print("\n📁 File Operations:")
-    csv_file = "./data.csv"
-    search_word = sys.argv[1] if len(sys.argv) > 1 else "example"
-
+    csv_file = './data.csv'
+    search_word = sys.argv[1] if len(sys.argv) > 1 else 'example'
+    
     _, file_time = measure_time(search_csv_file, csv_file, search_word)
-    results.append(BenchmarkResult(phase="CSV Search & Write", duration_ms=file_time))
+    results.append(BenchmarkResult(phase='CSV Search & Write', duration_ms=file_time))
     print(f"✓ CSV Search & Write: {file_time:.2f}ms")
-
+    
     # Phase 3: Network operations
     print("\n📡 Network Operations:")
     network_results = await run_network_tasks()
     results.extend(network_results)
-
+    
     # Calculate totals
     total_end = time.perf_counter()
     total_time = (total_end - total_start) * 1000
-
+    
     cpu_time = sum(r.duration_ms for r in cpu_results)
     network_time = sum(r.duration_ms for r in network_results)
-
+    
     print("\n" + "=" * 50)
     print("📊 Summary:")
     print(f"   Total Execution Time: {total_time:.2f}ms")
@@ -66,7 +66,14 @@ async def run_benchmark():
 
 if __name__ == "__main__":
     import asyncio
-
+    
+    # Use uvloop if available for better async performance
+    try:
+        import uvloop
+        asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+    except ImportError:
+        pass
+    
     try:
         asyncio.run(run_benchmark())
     except Exception as err:

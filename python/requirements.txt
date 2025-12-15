@@ -1,13 +1,16 @@
-# Python Benchmark Dependencies
-# Optional but recommended for better network performance
+# Python Benchmark Dependencies (Optimized)
+# Install with: pip3 install -r requirements.txt
 
-# Async HTTP client for concurrent requests
+# Async HTTP client for concurrent requests (REQUIRED for performance)
 aiohttp>=3.9.0
 
-# Note: All other operations use Python standard library only
-# - json (built-in)
-# - re (built-in)
-# - asyncio (built-in)
-# - time (built-in)
-# - random (built-in)
-# - dataclasses (built-in Python 3.7+)
+# Ultra-fast event loop (HIGHLY RECOMMENDED - 2-4x faster async)
+uvloop>=0.19.0
+
+# Note: All other operations use Python standard library
+# Optimizations included:
+# - functools.lru_cache for memoization
+# - mmap for fast file reading
+# - Pre-compiled regex patterns
+# - List comprehensions over loops
+# - Memory-efficient operations
