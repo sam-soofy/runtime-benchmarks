@@ -1,0 +1,6 @@
+{
+  "name": "deno-benchmark",
+  "version": "1.0.0",
+  "description": "Deno runtime benchmark suite",
+  "private": true
+}
