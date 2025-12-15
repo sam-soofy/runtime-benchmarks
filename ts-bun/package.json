@@ -1,0 +1,19 @@
+{
+  "name": "bun-benchmark",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Bun runtime benchmark suite",
+  "main": "main.ts",
+  "scripts": {
+    "start": "bun run main.ts",
+    "bench": "./run.sh",
+    "generate-csv": "./generate_csv.sh"
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
